@@ -1,9 +1,12 @@
 package com.freenow.android_demo;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.DataInteraction;
 import android.support.test.espresso.ViewInteraction;
+import android.support.test.espresso.matcher.RootMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.rule.GrantPermissionRule;
@@ -14,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 
 import com.freenow.android_demo.R;
+import com.freenow.android_demo.activities.AuthenticationActivity;
 import com.freenow.android_demo.activities.DriverProfileActivity;
 import com.freenow.android_demo.activities.MainActivity;
 import com.freenow.android_demo.adapters.DriverAdapter;
@@ -44,34 +48,30 @@ import static android.support.test.espresso.matcher.ViewMatchers.*;
 import static com.freenow.android_demo.misc.Constants.LOG_TAG;
 import static org.hamcrest.Matchers.*;
 import static android.support.test.espresso.matcher.RootMatchers.*;
+import static org.junit.Assert.assertEquals;
 
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class FormattedTestCode {
 
-
-    @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
-    private MainActivity mActivity = null;
-
-
     @Rule
     public GrantPermissionRule mGrantPermissionRule =
             GrantPermissionRule.grant(
                     "android.permission.ACCESS_FINE_LOCATION");
 
+    @Rule
+    public ActivityTestRule<AuthenticationActivity> activityRule =
+            new ActivityTestRule<>(AuthenticationActivity.class);
 
-    @Before
-    public void setActivity() {
-        mActivity = mActivityTestRule.getActivity();
+    @Test
+    public void setAppContext(){
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        assertEquals("com.freenow.android_demo", appContext.getPackageName());
     }
-
 
     @Test
     public void loginToApp() {
-        MainActivity activityUnderTest = mActivityTestRule.getActivity();
-        activityUnderTest.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
         onView(withId(R.id.edt_username)).perform(click(), replaceText("crazydog335"), closeSoftKeyboard());
         onView(withId(R.id.edt_password)).perform(click(), replaceText("venture"), closeSoftKeyboard());
         onView(withId(R.id.btn_login))
@@ -83,9 +83,7 @@ public class FormattedTestCode {
         Thread.sleep(5000);
         onView(withId(R.id.textSearch)).perform(click(), replaceText("sa"), closeSoftKeyboard());
 
-        onView(withText("Sarah Scott"))
-                .inRoot(withDecorView(not(is(mActivity.getWindow().getDecorView()))))
-                .perform(click());
+        onView(withText("Sarah Scott")).inRoot(RootMatchers.isPlatformPopup()).perform(click());
 
         onView(withId(R.id.fab))
                 .perform(click());
