@@ -20,6 +20,10 @@ jobs:
 
 
       - run:
+          name: Installing libpulse
+          command: apt-get install libpulse0:i386
+
+      - run:
           name: Setup emulator
           command: sdkmanager "system-images;android-22;google_apis;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-22;google_apis;armeabi-v7a"
       - run:
