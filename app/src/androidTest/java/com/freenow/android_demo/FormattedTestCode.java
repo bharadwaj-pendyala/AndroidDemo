@@ -1,6 +1,7 @@
 package com.freenow.android_demo;
 
 
+import android.content.Intent;
 import android.support.test.espresso.DataInteraction;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.filters.LargeTest;
@@ -54,6 +55,7 @@ public class FormattedTestCode {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
     private MainActivity mActivity = null;
 
+
     @Rule
     public GrantPermissionRule mGrantPermissionRule =
             GrantPermissionRule.grant(
@@ -68,6 +70,8 @@ public class FormattedTestCode {
 
     @Test
     public void loginToApp() {
+        MainActivity activityUnderTest = mActivityTestRule.getActivity();
+        activityUnderTest.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
         onView(withId(R.id.edt_username)).perform(click(), replaceText("crazydog335"), closeSoftKeyboard());
         onView(withId(R.id.edt_password)).perform(click(), replaceText("venture"), closeSoftKeyboard());
         onView(withId(R.id.btn_login))
