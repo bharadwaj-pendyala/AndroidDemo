@@ -21,7 +21,7 @@ jobs:
 
       - run:
           name: Installing libpulse
-          command: apt-get install libpulse0:i386
+          command: sudo apt-get install libpulse0:i386
 
       - run:
           name: Setup emulator
