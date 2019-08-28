@@ -50,11 +50,6 @@ import static android.support.test.espresso.matcher.RootMatchers.*;
 public class FormattedTestCode {
 
 
-    @Before
-    public void setActivity() {
-        mActivity = mActivityTestRule.getActivity();
-    }
-
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
     private MainActivity mActivity = null;
@@ -63,6 +58,12 @@ public class FormattedTestCode {
     public GrantPermissionRule mGrantPermissionRule =
             GrantPermissionRule.grant(
                     "android.permission.ACCESS_FINE_LOCATION");
+
+
+    @Before
+    public void setActivity() {
+        mActivity = mActivityTestRule.getActivity();
+    }
 
 
     @Test
