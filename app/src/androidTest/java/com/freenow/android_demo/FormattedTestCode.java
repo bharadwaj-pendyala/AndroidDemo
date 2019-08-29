@@ -2,6 +2,7 @@ package com.freenow.android_demo;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.matcher.RootMatchers;
 import android.support.test.filters.LargeTest;
@@ -9,19 +10,23 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.rule.GrantPermissionRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.freenow.android_demo.activities.AuthenticatedActivity;
 import com.freenow.android_demo.activities.AuthenticationActivity;
+import com.freenow.android_demo.activities.DriverProfileActivity;
 import com.freenow.android_demo.activities.MainActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+
 import static org.junit.Assert.assertEquals;
 
 
@@ -35,14 +40,9 @@ public class FormattedTestCode {
                     "android.permission.ACCESS_FINE_LOCATION");
 
     @Rule
-    public ActivityTestRule<AuthenticationActivity> activityRule =
-            new ActivityTestRule<>(AuthenticationActivity.class);
+    public ActivityTestRule<MainActivity> mActivityRule =
+            new ActivityTestRule<>(MainActivity.class);
 
-    @Test
-    public void setAppContext() {
-        Context appContext = InstrumentationRegistry.getTargetContext();
-        assertEquals("com.freenow.android_demo", appContext.getPackageName());
-    }
 
     @Test
     public void loginToApp() {
@@ -56,12 +56,9 @@ public class FormattedTestCode {
     public void searchText() throws InterruptedException{
         Thread.sleep(5000);
         onView(withId(R.id.textSearch)).perform(click(), replaceText("sa"), closeSoftKeyboard());
-
         onView(withText("Sarah Scott")).inRoot(RootMatchers.isPlatformPopup()).perform(click());
-
         onView(withId(R.id.fab))
                 .perform(click());
-
     }
 
 }
