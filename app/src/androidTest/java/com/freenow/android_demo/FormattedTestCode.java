@@ -3,6 +3,7 @@ package com.freenow.android_demo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.matcher.RootMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.rule.GrantPermissionRule;
@@ -20,6 +21,7 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
 
 
@@ -50,16 +52,16 @@ public class FormattedTestCode {
                 .perform(click());
     }
 
-//    @Test
-//    public void searchText() throws InterruptedException{
-//        Thread.sleep(5000);
-//        onView(withId(R.id.textSearch)).perform(click(), replaceText("sa"), closeSoftKeyboard());
-//
-//        onView(withText("Sarah Scott")).inRoot(RootMatchers.isPlatformPopup()).perform(click());
-//
-//        onView(withId(R.id.fab))
-//                .perform(click());
-//
-//    }
+    @Test
+    public void searchText() throws InterruptedException{
+        Thread.sleep(5000);
+        onView(withId(R.id.textSearch)).perform(click(), replaceText("sa"), closeSoftKeyboard());
+
+        onView(withText("Sarah Scott")).inRoot(RootMatchers.isPlatformPopup()).perform(click());
+
+        onView(withId(R.id.fab))
+                .perform(click());
+
+    }
 
 }
