@@ -32,7 +32,7 @@ import static org.junit.Assert.assertEquals;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class FormattedTestCode {
+public class InstrumentedTest {
 
     @Rule
     public GrantPermissionRule mGrantPermissionRule =
