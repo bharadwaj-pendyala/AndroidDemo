@@ -18,7 +18,7 @@ public class DriverProfilePage extends Utils{
     Test
      */
 
-    public void callDriver(){
+    public void callDriver() {
         clickView(callBtn());
     }
 

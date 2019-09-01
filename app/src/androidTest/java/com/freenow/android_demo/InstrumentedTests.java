@@ -37,12 +37,8 @@ public class InstrumentedTests {
     }
 
     @Test
-    public void TC_02_searchReqDriverTest() throws InterruptedException {
+    public void TC_02_searchReqDriverTestAndCall() throws InterruptedException {
         hp.driverSearch("sa", "Sarah Scott");
-    }
-
-    @Test
-    public void TC_03_callDriverTest() throws InterruptedException {
         dp.callDriver();
     }
 
