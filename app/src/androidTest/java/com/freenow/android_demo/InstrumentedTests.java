@@ -42,7 +42,7 @@ public class InstrumentedTests {
     }
 
     @Test
-    public void TC_03_callDriverTest(){
+    public void TC_03_callDriverTest() throws InterruptedException {
         dp.callDriver();
     }
 
