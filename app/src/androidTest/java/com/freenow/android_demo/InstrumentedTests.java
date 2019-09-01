@@ -10,9 +10,13 @@ import com.freenow.android_demo.pageobjects.DriverProfilePage;
 import com.freenow.android_demo.pageobjects.HomePage;
 import com.freenow.android_demo.pageobjects.LoginPage;
 
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class InstrumentedTests {
 
     protected final Context appContext = InstrumentationRegistry.getTargetContext();
@@ -28,18 +32,17 @@ public class InstrumentedTests {
     DriverProfilePage dp = new DriverProfilePage();
 
     @Test
-    public void loginValidationTest(){
+    public void TC_01_loginValidationTest(){
         lp.loginToFreeNow("crazydog335", "venture");
     }
 
     @Test
-    public void searchReqDriverTest() throws InterruptedException {
-        Thread.sleep(5000);
+    public void TC_02_searchReqDriverTest() throws InterruptedException {
         hp.driverSearch("sa", "Sarah Scott");
     }
 
     @Test
-    public void callDriverTest(){
+    public void TC_03_callDriverTest(){
         dp.callDriver();
     }
 

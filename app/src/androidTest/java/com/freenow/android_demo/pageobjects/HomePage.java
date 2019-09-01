@@ -21,7 +21,8 @@ public class HomePage extends Utils{
     /*
     Tests
      */
-    public void driverSearch(String searchString, String driverName){
+    public void driverSearch(String searchString, String driverName) throws InterruptedException {
+        Thread.sleep(5000);
         enterTextInputCloseKeyboard(searchBox(), searchString);
         selectRootMatchersPlatformPopUp(searchResultsDriverSelection(driverName));
     }
