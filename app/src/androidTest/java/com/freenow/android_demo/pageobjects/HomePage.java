@@ -1,30 +1,37 @@
 package com.freenow.android_demo.pageobjects;
 
 import android.support.test.espresso.ViewInteraction;
+import android.support.test.rule.ActivityTestRule;
 
 import com.freenow.android_demo.R;
 
-public class HomePage extends Utils{
+public class HomePage extends Utils {
+
+
+    public HomePage(ActivityTestRule activityRule) {
+        super(activityRule);
+    }
 
     /*
     Page Elements
      */
 
-    public ViewInteraction searchBox(){
+    public ViewInteraction searchBox() {
         return findElementById(R.id.textSearch);
     }
 
-    public ViewInteraction searchResultsDriverSelection(String driverName){
+    public ViewInteraction searchResultsDriverSelection(String driverName) {
         return findElementByText(driverName);
     }
 
     /*
     Tests
      */
-    public void driverSearch(String searchString, String driverName) throws InterruptedException {
+    public DriverProfilePage driverSearch(String searchString, String driverName) throws InterruptedException {
         Thread.sleep(5000);
         enterTextInputCloseKeyboard(searchBox(), searchString);
         selectRootMatchersPlatformPopUp(searchResultsDriverSelection(driverName));
+        return new DriverProfilePage(this.getActivityRule());
     }
 
 }

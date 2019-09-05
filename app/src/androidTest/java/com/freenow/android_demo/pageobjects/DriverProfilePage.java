@@ -1,16 +1,21 @@
 package com.freenow.android_demo.pageobjects;
 
 import android.support.test.espresso.ViewInteraction;
+import android.support.test.rule.ActivityTestRule;
 
 import com.freenow.android_demo.R;
 
-public class DriverProfilePage extends Utils{
+public class DriverProfilePage extends Utils {
+
+    public DriverProfilePage(ActivityTestRule activityRule) {
+        super(activityRule);
+    }
 
     /*
     Elements
      */
 
-    public ViewInteraction callBtn(){
+    public ViewInteraction callBtn() {
         return findElementById(R.id.fab);
     }
 
@@ -18,8 +23,9 @@ public class DriverProfilePage extends Utils{
     Test
      */
 
-    public void callDriver() {
+    public DriverProfilePage callDriver() {
         clickView(callBtn());
+        return this;
     }
 
 }

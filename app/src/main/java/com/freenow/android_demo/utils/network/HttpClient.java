@@ -4,12 +4,12 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.util.Log;
 
+import com.freenow.android_demo.models.Driver;
+import com.freenow.android_demo.models.User;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.freenow.android_demo.models.Driver;
-import com.freenow.android_demo.models.User;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -54,7 +54,8 @@ public class HttpClient {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 try (ResponseBody responseBody = response.body()) {
-                    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
                     ArrayList<Driver> drivers = getDrivers(responseBody.string());
                     Log.i(LOG_TAG, "Fetched successfully " + drivers.size() + " drivers.");
                     driverCallback.setDrivers(drivers);
@@ -77,7 +78,8 @@ public class HttpClient {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 try (ResponseBody responseBody = response.body()) {
-                    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+                    if (!response.isSuccessful())
+                        throw new IOException("Unexpected code " + response);
                     userCallback.setUser(getUser(responseBody.string()));
                     userCallback.run();
                 }
@@ -89,7 +91,7 @@ public class HttpClient {
         JsonObject jsonObject = mJsonParser.parse(jsonResponse).getAsJsonObject();
         JsonArray results = jsonObject.getAsJsonArray("results");
         ArrayList<Driver> drivers = new ArrayList<>();
-        for (JsonElement jsonElement :results) {
+        for (JsonElement jsonElement : results) {
             JsonObject jsonUser = jsonElement.getAsJsonObject();
             JsonObject name = jsonUser.getAsJsonObject("name");
             String firstName = name.get("first").getAsString();

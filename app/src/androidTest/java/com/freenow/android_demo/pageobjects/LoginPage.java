@@ -1,27 +1,29 @@
 package com.freenow.android_demo.pageobjects;
 
 import android.support.test.espresso.ViewInteraction;
+import android.support.test.rule.ActivityTestRule;
 
 import com.freenow.android_demo.R;
 
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-
 public class LoginPage extends Utils {
+
+    public LoginPage(ActivityTestRule activityRule) {
+        super(activityRule);
+    }
 
     /*
     Page Elements
      */
 
-    public ViewInteraction userNameFld(){
+    public ViewInteraction userNameFld() {
         return findElementById(R.id.edt_username);
     }
 
-    public ViewInteraction pwdFld(){
+    public ViewInteraction pwdFld() {
         return findElementById(R.id.edt_password);
     }
 
-    public ViewInteraction loginBtn(){
+    public ViewInteraction loginBtn() {
         return findElementById(R.id.btn_login);
     }
 
@@ -29,10 +31,11 @@ public class LoginPage extends Utils {
     /*
     Tests
      */
-    public void loginToFreeNow(String userName, String pwd){
+    public HomePage loginToFreeNow(String userName, String pwd) {
         enterTextInputCloseKeyboard(userNameFld(), userName);
         enterTextInputCloseKeyboard(pwdFld(), pwd);
         clickView(loginBtn());
+        return new HomePage(this.getActivityRule());
     }
 
 }

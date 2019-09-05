@@ -27,12 +27,12 @@ public class InstrumentedTests {
     @Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
 
-    LoginPage lp = new LoginPage();
-    HomePage hp = new HomePage();
-    DriverProfilePage dp = new DriverProfilePage();
+    LoginPage lp = new LoginPage(activityRule);
+    HomePage hp = new HomePage(activityRule);
+    DriverProfilePage dp = new DriverProfilePage(activityRule);
 
     @Test
-    public void TC_01_loginValidationTest(){
+    public void TC_01_loginValidationTest() {
         lp.loginToFreeNow("crazydog335", "venture");
     }
 
@@ -41,5 +41,6 @@ public class InstrumentedTests {
         hp.driverSearch("sa", "Sarah Scott");
         dp.callDriver();
     }
+
 
 }
