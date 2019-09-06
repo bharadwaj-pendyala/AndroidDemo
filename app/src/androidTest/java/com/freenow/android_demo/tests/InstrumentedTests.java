@@ -20,6 +20,8 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class InstrumentedTests {
 
+    Constants ct;
+
     protected final Context appContext = InstrumentationRegistry.getTargetContext();
 
     @Rule
@@ -31,15 +33,15 @@ public class InstrumentedTests {
     @Test
     public void TC_01_loginValidationTest() {
         LoginPage lp = new LoginPage(activityRule);
-        lp.loginToFreeNow(Constants.getUserName(), Constants.getPassword());
+        lp.loginToFreeNow(ct.getUserName(), ct.getPassword());
     }
 
     @Test
     public void TC_02_searchReqDriverTestAndCall() throws InterruptedException {
         HomePage hp = new HomePage(activityRule);
-        hp.driverSearch(Constants.getSearchString(), Constants.getReqDriverName());
+        hp.driverSearch(ct.getSearchString(), ct.getReqDriverName());
         DriverProfilePage dp = new DriverProfilePage(activityRule);
         dp.callDriver();
     }
-    
+
 }
