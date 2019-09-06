@@ -1,4 +1,4 @@
-package com.freenow.android_demo.pageobjects;
+package com.freenow.android_demo.utils;
 
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.action.ViewActions;
