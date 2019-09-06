@@ -4,10 +4,14 @@ import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 
 import com.freenow.android_demo.R;
+import com.freenow.android_demo.activities.AuthenticationActivity;
+import com.freenow.android_demo.activities.MainActivity;
 import com.freenow.android_demo.utils.Utils;
 
-public class HomePage extends Utils {
+import org.junit.Before;
+import org.junit.Rule;
 
+public class HomePage extends Utils {
 
     public HomePage(ActivityTestRule activityRule) {
         super(activityRule);

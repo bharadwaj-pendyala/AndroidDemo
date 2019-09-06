@@ -1,19 +1,25 @@
-package com.freenow.android_demo;
+package com.freenow.android_demo.tests;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.rule.GrantPermissionRule;
 
+import com.freenow.android_demo.activities.AuthenticationActivity;
 import com.freenow.android_demo.activities.MainActivity;
 import com.freenow.android_demo.pageobjects.DriverProfilePage;
 import com.freenow.android_demo.pageobjects.HomePage;
 import com.freenow.android_demo.pageobjects.LoginPage;
+import com.freenow.android_demo.utils.Constants;
+import com.freenow.android_demo.utils.Utils;
 
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+
+import static org.junit.Assert.assertEquals;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -27,18 +33,25 @@ public class InstrumentedTests {
     @Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
 
-    LoginPage lp = new LoginPage(activityRule);
-    HomePage hp = new HomePage(activityRule);
-    DriverProfilePage dp = new DriverProfilePage(activityRule);
+    @Rule
+    public ActivityTestRule<AuthenticationActivity> authActivityRule = new ActivityTestRule<>(AuthenticationActivity.class);
+
+    @Before
+    public void useAppContext() {
+        assertEquals("com.freenow.android_demo", appContext.getPackageName());
+    }
 
     @Test
     public void TC_01_loginValidationTest() {
-        lp.loginToFreeNow("crazydog335", "venture");
+        LoginPage lp = new LoginPage(authActivityRule);
+        lp.loginToFreeNow(Constants.getUserName(), Constants.getPassword());
     }
 
     @Test
     public void TC_02_searchReqDriverTestAndCall() throws InterruptedException {
-        hp.driverSearch("sa", "Sarah Scott");
+        HomePage hp = new HomePage(activityRule);
+        hp.driverSearch(Constants.getSearchString(), Constants.getReqDriverName());
+        DriverProfilePage dp = new DriverProfilePage(activityRule);
         dp.callDriver();
     }
 

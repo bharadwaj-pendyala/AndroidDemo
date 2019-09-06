@@ -30,7 +30,6 @@ public class Utils {
     /*
      Finding ViewMatchers
      */
-    protected ViewInteraction mViewInteraction;
 
     public ViewInteraction findElementById(int id) {
         return onView(withId(id));

@@ -4,7 +4,11 @@ import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 
 import com.freenow.android_demo.R;
+import com.freenow.android_demo.activities.AuthenticationActivity;
 import com.freenow.android_demo.utils.Utils;
+
+import org.junit.Before;
+import org.junit.Rule;
 
 public class LoginPage extends Utils {
 
