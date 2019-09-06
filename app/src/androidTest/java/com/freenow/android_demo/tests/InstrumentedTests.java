@@ -5,21 +5,16 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.rule.GrantPermissionRule;
 
-import com.freenow.android_demo.activities.AuthenticationActivity;
 import com.freenow.android_demo.activities.MainActivity;
 import com.freenow.android_demo.pageobjects.DriverProfilePage;
 import com.freenow.android_demo.pageobjects.HomePage;
 import com.freenow.android_demo.pageobjects.LoginPage;
 import com.freenow.android_demo.utils.Constants;
-import com.freenow.android_demo.utils.Utils;
 
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import static org.junit.Assert.assertEquals;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -28,22 +23,14 @@ public class InstrumentedTests {
     protected final Context appContext = InstrumentationRegistry.getTargetContext();
 
     @Rule
-    public GrantPermissionRule permissionRule = GrantPermissionRule.grant(android.Manifest.permission.ACCESS_FINE_LOCATION);
-
-    @Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
 
     @Rule
-    public ActivityTestRule<AuthenticationActivity> authActivityRule = new ActivityTestRule<>(AuthenticationActivity.class);
-
-    @Before
-    public void useAppContext() {
-        assertEquals("com.freenow.android_demo", appContext.getPackageName());
-    }
+    public GrantPermissionRule permissionRule = GrantPermissionRule.grant(android.Manifest.permission.ACCESS_FINE_LOCATION);
 
     @Test
     public void TC_01_loginValidationTest() {
-        LoginPage lp = new LoginPage(authActivityRule);
+        LoginPage lp = new LoginPage(activityRule);
         lp.loginToFreeNow(Constants.getUserName(), Constants.getPassword());
     }
 
@@ -54,6 +41,5 @@ public class InstrumentedTests {
         DriverProfilePage dp = new DriverProfilePage(activityRule);
         dp.callDriver();
     }
-
-
+    
 }
